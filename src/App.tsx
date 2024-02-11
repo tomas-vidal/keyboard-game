@@ -33,7 +33,7 @@ function App() {
 
   const handleKeyDown = (e: KeyboardEvent) => {
     const keyCode = e.nativeEvent.keyCode;
-    if (keyCode === 32) {
+    if (keyCode === 32 || keyCode === 13) {
       const result = compareWords();
       result ? setCorrect(correct + 1) : setIncorrect(incorrect + 1);
       setCurrWordIdx(currWordIdx + 1);
@@ -83,13 +83,16 @@ function App() {
     <>
       <main className="font-mono w-full h-screen bg-gray-700 flex text-green-400">
         <div className="w-[70%] m-auto text-center">
-          <h1 className="text-3xl font-bold mb-4">{counter}</h1>
+          <h1 role="counter" className="text-3xl font-bold mb-4">
+            {counter}
+          </h1>
           <input
             ref={input}
             className="block p-2.5 w-full text-sm  rounded-lg border text-black resize-none focus:ring-2 focus:ring-green-500 focus:outline-none"
             placeholder="Write here..."
             type="text"
             value={actualWord}
+            role="input-text"
             onChange={(evt) => setActualWord(evt.currentTarget.value)}
             onKeyDown={(e) => handleKeyDown(e)}
             disabled={started ? false : true}
@@ -114,7 +117,7 @@ function App() {
             </>
           )}
 
-          <div className="mt-5 text-left break-words">
+          <div className="mt-5 text-left break-words" role="text-generator">
             {words.map((word, idx) => {
               return (
                 <>
@@ -136,11 +139,15 @@ function App() {
           <section className="mt-10 mb-3 flex justify-around text-white">
             <div>
               <h2 className="text-4xl">Correct</h2>
-              <p className="text-8xl">{correct}</p>
+              <p className="text-8xl" role="correct-counter">
+                {correct}
+              </p>
             </div>
             <div>
               <h2 className="text-4xl">Incorrect</h2>
-              <p className="text-8xl">{incorrect}</p>
+              <p className="text-8xl" role="incorrect-counter">
+                {incorrect}
+              </p>
             </div>
             <div>
               <h2 className="text-4xl">Accurancy</h2>
