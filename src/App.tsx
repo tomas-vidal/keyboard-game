@@ -15,10 +15,10 @@ import {
 import { UserDB } from "./types/User";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBPLgrqsCoi9ZIH8zWqiorCXVrm0CYhkSw",
-  authDomain: "keyboard-game-769c1.firebaseapp.com",
+  apiKey: import.meta.env.FIREBASE_APIKEY,
+  authDomain: import.meta.env.FIREBASE_AUTHDOMAIN,
   projectId: "keyboard-game-769c1",
-  storageBucket: "keyboard-game-769c1.appspot.com",
+  storageBucket: import.meta.env.FIREBASE_STORAGEBUCKET,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -62,7 +62,6 @@ function App() {
           newDocs.push(doc.data() as UserDB);
         });
         setLeaderboard(newDocs);
-        console.log(newDocs);
       }
     );
   }, []);
@@ -149,7 +148,7 @@ function App() {
 
   return (
     <>
-      <main className="font-mono w-full h-screen bg-gray-700 flex text-green-400">
+      <main className="font-mono w-full h-full bg-gray-700 flex text-green-400 py-2">
         <div className="w-[70%] m-auto text-center">
           <h1 role="counter" className="text-3xl font-bold mb-4">
             {counter}
